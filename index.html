@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DealVault – Unlocking Better Buys</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="DealVault – Unlocking better buys with curated trending products at great prices." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand-bg: #ffb347;      /* warm orange */
+      --brand-dark: #102033;   /* deep navy */
+      --brand-accent: #ff8c3a;
+      --text-main: #121212;
+      --text-muted: #5f6b7a;
+      --card-bg: #ffffff;
+      --border-soft: #e4e7ee;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 14px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background: #f4f5f9;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout wrapper */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(244, 245, 249, 0.9);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.9rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .logo-wrap img {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-size: 1.05rem;
+      color: var(--brand-dark);
+    }
+
+    .logo-text span:last-child {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      padding: 0.2rem 0.1rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.15rem;
+      width: 0;
+      height: 2px;
+      background: var(--brand-accent);
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.52rem 1.2rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out, border-color 0.12s ease-out;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary {
+      background: var(--brand-dark);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.32);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--brand-accent);
+      color: var(--brand-dark);
+      background: #ffffff;
+    }
+
+    /* HERO */
+    .hero {
+      background: radial-gradient(circle at top left, #ffe3b4 0, #f4f5f9 46%, #ffffff 100%);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem 1.4rem 3rem;
+      display: grid;
+      gap: 2.4rem;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--brand-dark);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
+      line-height: 1.1;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-title span.accent {
+      color: var(--brand-accent);
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 32rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-footnote {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-card {
+      background: var(--card-bg);
+      border-radius: 26px;
+      padding: 1.3rem 1.3rem 1.1rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-card-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--brand-dark);
+    }
+
+    .hero-card-pill {
+      font-size: 0.78rem;
+      padding: 0.18rem 0.6rem;
+      background: rgba(16, 32, 51, 0.06);
+      border-radius: 999px;
+      color: var(--text-muted);
+    }
+
+    .product-feature {
+      display: grid;
+      grid-template-columns: 90px minmax(0, 1fr);
+      gap: 0.9rem;
+      align-items: center;
+      margin-bottom: 0.9rem;
+    }
+
+    .product-thumb {
+      width: 90px;
+      height: 90px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ffe3b4, #ffb347);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--brand-dark);
+      font-weight: 600;
+    }
+
+    .product-meta h4 {
+      font-size: 0.92rem;
+      margin-bottom: 0.2rem;
+      color: var(--brand-dark);
+    }
+
+    .product-meta p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .product-price {
+      margin-top: 0.45rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--brand-dark);
+    }
+
+    .product-price span {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 0.3rem;
+      text-decoration: line-through;
+    }
+
+    .hero-card-footer {
+      margin-top: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* MAIN CONTENT SECTIONS */
+    main {
+      flex: 1;
+    }
+
+    .section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem 1.4rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1.2rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--brand-dark);
+    }
+
+    .section-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      max-width: 22rem;
+    }
+
+    /* PRODUCT GRID */
+    .product-grid {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 0.9rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .product-image {
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #ffe8c3, #ffb347);
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--brand-dark);
+      font-weight: 500;
+    }
+
+    .product-info h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.2rem;
+      color: var(--brand-dark);
+    }
+
+    .product-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem;
+      margin-top: auto;
+    }
+
+    .product-price-main {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--brand-dark);
+    }
+
+    .product-price-main span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-left: 0.25rem;
+      text-decoration: line-through;
+    }
+
+    .product-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(16, 32, 51, 0.06);
+      color: var(--text-muted);
+    }
+
+    /* WHY DEALVAULT */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      border: 1px solid var(--border-soft);
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: rgba(16, 32, 51, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-card h3 {
+      font-size: 0.96rem;
+      margin-bottom: 0.25rem;
+      color: var(--brand-dark);
+    }
+
+    .feature-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* CTA / NEWSLETTER */
+    .cta {
+      background: linear-gradient(135deg, #102033, #1a3350);
+      border-radius: 24px;
+      padding: 1.8rem 1.6rem;
+      color: #f9fafb;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.6rem;
+      align-items: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .cta h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .cta p {
+      font-size: 0.86rem;
+      color: #e5e7eb;
+    }
+
+    .cta-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: flex-end;
+    }
+
+    .cta-form input {
+      flex: 1 1 180px;
+      padding: 0.6rem 0.8rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.86rem;
+      outline: none;
+      max-width: 240px;
+    }
+
+    .cta-footnote {
+      font-size: 0.78rem;
+      margin-top: 0.3rem;
+      opacity: 0.85;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      background: #ffffff;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.3rem 1.4rem 1.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--brand-dark);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+      .cta {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-right {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-inner {
+        padding-top: 1.8rem;
+      }
+      .section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      .hero-title {
+        font-size: 1.9rem;
+      }
+      .cta {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <nav class="nav">
+      <div class="nav-left">
+        <a href="#top" class="logo-wrap">
+          <!-- replace src with your real logo path -->
+          <img src="img/dealvault-logo.png" alt="DealVault logo">
+          <div class="logo-text">
+            <span>DealVault</span>
+            <span>Unlocking Better Buys</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="nav-links">
+        <a href="#shop">Shop</a>
+        <a href="#why">Why DealVault</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-cta">
+        <button class="btn btn-ghost">Track Order</button>
+        <button class="btn btn-primary">View Latest Deals</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-kicker">DEALVAULT • UNLOCKING BETTER BUYS</div>
+        <h1 class="hero-title">
+          Curated <span class="accent">trending products</span><br>without the guesswork.
+        </h1>
+        <p class="hero-subtitle">
+          DealVault hand-picks products that are actually worth your money – tested, rated and ready to ship.
+          No fake hype. Just better buys.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">✓ TikTok-worthy gadgets</span>
+          <span class="badge">✓ UK & EU friendly shipping</span>
+          <span class="badge">✓ Under-£30 hero products</span>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary">Shop Today’s Featured Deals</button>
+          <button class="btn btn-ghost">Browse All Categories</button>
+        </div>
+
+        <p class="hero-footnote">
+          Free returns on faulty items · New drops added daily
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div>
+              <div class="hero-card-title">Today’s Featured Find</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Limited stock · High demand</div>
+            </div>
+            <span class="hero-card-pill">Staff Pick</span>
+          </div>
+
+          <div class="product-feature">
+            <div class="product-thumb">
+              Mini&nbsp;Thermal<br>Printer
+            </div>
+            <div class="product-meta">
+              <h4>Pocket Thermal Printer</h4>
+              <p>Print labels, notes &amp; photos straight from your phone – perfect for study, journaling and small businesses.</p>
+              <div class="product-price">£18.99 <span>£27.99</span></div>
+            </div>
+          </div>
+
+          <div class="hero-card-footer">
+            <span>⭐ 4.8 rating · 2.1k+ sold</span>
+            <button class="btn btn-primary" style="padding:0.4rem 0.9rem;font-size:0.8rem;">
+              View on TikTok Shop
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- SHOP SECTION -->
+    <section class="section" id="shop">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Latest drops from the Vault</h2>
+          <p class="section-subtitle">Plug these straight into your TikTok Shop, marketplace, or personal setup. Swap the placeholder cards for your real products.</p>
+        </div>
+        <button class="btn btn-ghost">View all products →</button>
+      </div>
+
+      <div class="product-grid">
+        <!-- PRODUCT 1 -->
+        <article class="product-card">
+          <div class="product-image">
+            Product image here
+          </div>
+          <div class="product-info">
+            <h3>Mini Pocket Thermal Printer</h3>
+            <p>Ink-free, wireless and ultra-portable. Ideal for notes, labels and aesthetic journals.</p>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <div class="product-price-main">£18.99 <span>£27.99</span></div>
+              <div style="font-size:0.76rem;color:var(--text-muted);">Free UK shipping over £30</div>
+            </div>
+            <button class="btn btn-primary" style="padding:0.4rem 0.9rem;font-size:0.78rem;">Add to cart</button>
+          </div>
+        </article>
+
+        <!-- PRODUCT 2 -->
+        <article class="product-card">
+          <div class="product-image">
+            Product image here
+          </div>
+          <div class="product-info">
+            <h3>LED Strip Ambience Lights</h3>
+            <p>Transform any room with colour-changing, app-controlled ambient lighting.</p>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <div class="product-price-main">£14.50 <span>£21.00</span></div>
+              <span class="product-tag">Best-seller</span>
+            </div>
+            <button class="btn btn-primary" style="padding:0.4rem 0.9rem;font-size:0.78rem;">Add to cart</button>
+          </div>
+        </article>
+
+        <!-- PRODUCT 3 -->
+        <article class="product-card">
+          <div class="product-image">
+            Product image here
+          </div>
+          <div class="product-info">
+            <h3>Adjustable Phone Tripod Stand</h3>
+            <p>Stable, foldable stand for filming TikToks, Zoom calls and product demos.</p>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <div class="product-price-main">£11.99 <span>£16.99</span></div>
+              <span class="product-tag">Content Creator Pick</span>
+            </div>
+            <button class="btn btn-primary" style="padding:0.4rem 0.9rem;font-size:0.78rem;">Add to cart</button>
+          </div>
+        </article>
+
+        <!-- PRODUCT 4 -->
+        <article class="product-card">
+          <div class="product-image">
+            Product image here
+          </div>
+          <div class="product-info">
+            <h3>MagSafe Wireless Charger Pad</h3>
+            <p>Snap-on fast charging for compatible phones – clean desk, no clutter.</p>
+          </div>
+          <div class="product-bottom">
+            <div>
+              <div class="product-price-main">£19.90 <span>£24.90</span></div>
+              <span class="product-tag">Limited stock</span>
+            </div>
+            <button class="btn btn-primary" style="padding:0.4rem 0.9rem;font-size:0.78rem;">Add to cart</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- WHY DEALVAULT -->
+    <section class="section" id="why">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Why shop with DealVault?</h2>
+          <p class="section-subtitle">We test, filter and organise products so you don’t waste hours scrolling or money on low-quality buys.</p>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Curated & verified</h3>
+          <p>Every product in the Vault is checked for real reviews, quality and reliability before it ever hits the page.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Built for viral demand</h3>
+          <p>We target products that look great on camera and solve real problems – ideal for TikTok, Instagram & short-form content.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3>Shipping that actually works</h3>
+          <p>We focus on suppliers with strong delivery times to the UK & EU, so your customers aren’t waiting months.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Creator-friendly support</h3>
+          <p>Need help picking products for your niche? Drop us a message and we’ll help you build a winning product list.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS / CTA -->
+    <section class="section" id="how-it-works">
+      <div class="cta">
+        <div>
+          <h2>Get tomorrow’s viral products today.</h2>
+          <p>Join the DealVault list and we’ll send you our freshest picks, conversion-tested hooks and creator-ready products.</p>
+          <p class="cta-footnote">No spam – just the best deals we can find, 1–2 times per week.</p>
+        </div>
+        <form class="cta-form">
+          <input type="email" placeholder="Enter your best email…" required>
+          <button class="btn btn-primary" type="submit">Join the Vault</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-inner">
+      <div>© <span id="year"></span> DealVault. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#top">Back to top</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Email us</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // simple year updater
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
